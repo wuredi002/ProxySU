@@ -2,7 +2,7 @@
 ProxySU Windows installer and configuration tool for V2Ray, Xray, Trojan, Trojan-Go, NaiveProxy, Brook, Hysteria2 and BBR.  
 ProxySU Windows 一键安装与配置工具，支持 V2Ray、Xray、Trojan、Trojan-Go、NaiveProxy、Brook、Hysteria2 及相关插件，也支持纯 IPv6 主机部署。  
 
-## Fork changes (4.3.1)  
+## Fork changes (4.3.2)  
 - VLESS XHTTP and VLESS XTLS (RAW) REALITY configuration and share links.  
 - Hysteria2 configuration and share-link scheme.  
 - gRPC service-name defaults/URL encoding and Trojan-Go WebSocket path validation.  
