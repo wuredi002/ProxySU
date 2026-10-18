@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProxySuper.Core.Models.Projects;
 using ProxySuper.Core.Templates;
@@ -26,7 +27,7 @@ namespace ProxySuper.Core.Services
             if (parameters.EnableWebSocket)
             {
                 settings["websocket"]["enabled"] = true;
-                settings["websocket"]["path"] = parameters.WebSocketPath;
+                settings["websocket"]["path"] = NormalizeWebSocketPath(parameters.WebSocketPath);
                 settings["websocket"]["host"] = parameters.Domain;
             }
 
@@ -34,6 +35,28 @@ namespace ProxySuper.Core.Services
             {
                 NullValueHandling = NullValueHandling.Ignore
             });
+        }
+
+        private static string NormalizeWebSocketPath(string path)
+        {
+            var normalized = (path ?? string.Empty).Trim();
+            if (string.IsNullOrEmpty(normalized))
+            {
+                return "/";
+            }
+
+            if (!normalized.StartsWith("/"))
+            {
+                normalized = "/" + normalized;
+            }
+
+            if (normalized.Contains(" ") || normalized.Contains("\r") || normalized.Contains("\n")
+                || normalized.Contains("?") || normalized.Contains("#"))
+            {
+                throw new ArgumentException("Trojan-Go WebSocket 路径不能包含空格、换行、查询参数或片段。", nameof(path));
+            }
+
+            return normalized;
         }
 
         public static string BuildCaddyConfig(TrojanGoSettings parameters, bool useCustomWeb = false)
@@ -44,16 +67,17 @@ namespace ProxySuper.Core.Services
 
             if (!useCustomWeb && !string.IsNullOrEmpty(parameters.MaskDomain))
             {
-                var prefix = "http://";
-                if (parameters.MaskDomain.StartsWith("https://"))
+                if (!Uri.TryCreate(parameters.MaskDomain.Trim(), UriKind.Absolute, out var maskUri)
+                    || (maskUri.Scheme != Uri.UriSchemeHttp && maskUri.Scheme != Uri.UriSchemeHttps)
+                    || string.IsNullOrWhiteSpace(maskUri.Host))
                 {
-                    prefix = "https://";
+                    throw new ArgumentException("伪装地址必须是有效的 http:// 或 https:// URL。", nameof(parameters.MaskDomain));
                 }
-                var domain = parameters.MaskDomain
-                    .TrimStart("http://".ToCharArray())
-                    .TrimStart("https://".ToCharArray());
 
-                caddyStr = caddyStr.Replace("##reverse_proxy##", $"reverse_proxy {prefix}{domain} {{ \n        header_up Host {domain} \n    }}");
+                var prefix = maskUri.Scheme + "://";
+                var domain = maskUri.IsDefaultPort ? maskUri.Host : maskUri.Host + ":" + maskUri.Port;
+
+                caddyStr = caddyStr.Replace("##reverse_proxy##", $"reverse_proxy {prefix}{domain} {{ \n        header_up Host {maskUri.Host} \n    }}");
             }
             else
             {
