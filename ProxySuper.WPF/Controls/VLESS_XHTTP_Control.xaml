@@ -48,7 +48,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             <Label Content="路径(path)" Width="140" />
-            <TextBox Text="{Binding Settings.VLESS_XHTTP_Path}" IsReadOnly="True" Width="300" />
+            <TextBox Text="{Binding Settings.VLESS_XHTTP_Path}" IsReadOnly="True" Width="300" ToolTip="XHTTP transport path; include this path in the client configuration." />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -58,7 +58,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             <Label Content="分享链接(ShareLink)" Width="140" />
-            <TextBox Text="{Binding Settings.VLESS_XHTTP_ShareLink,Mode=OneTime}" Width="300" IsReadOnly="True" />
+            <TextBox Text="{Binding Settings.VLESS_XHTTP_ShareLink,Mode=OneTime}" Width="300" IsReadOnly="True" ToolTip="Read-only share link. Select and copy the full value to import it into a compatible client." />
         </StackPanel>
     </StackPanel>
 </UserControl>
