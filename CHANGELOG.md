@@ -18,5 +18,5 @@
 - The CI workflow is not a formal release pipeline; no GitHub Release or tag is created by this change.
 
 ## Known follow-up
-- NuGet restore currently reports high-severity security advisories for SSH.NET 2023.0.0. Upgrade and compatibility testing should be handled as a separate change.
+- Upgraded SSH.NET from 2023.0.0 to 2026.0.0 and aligned the required cryptography, logging, and runtime NuGet dependencies to address high-severity SSH.NET advisories.
 - GUI interaction and live remote-server protocol deployment have not been exhaustively tested.
