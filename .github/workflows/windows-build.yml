@@ -36,12 +36,29 @@ jobs:
         shell: powershell
         run: .\tests\smoke-tests.ps1
 
+      - name: Package ProxySU.zip
+        if: success()
+        shell: pwsh
+        run: |
+          $publishDir = "ProxySuper.WPF/bin/Release"
+          if (!(Test-Path "$publishDir/ProxySU.exe") -and !(Get-ChildItem $publishDir -Filter "*.exe" -File -ErrorAction SilentlyContinue)) {
+            throw "No executable found in $publishDir"
+          }
+          if (Test-Path "dist") { Remove-Item "dist" -Recurse -Force }
+          New-Item -ItemType Directory -Path "dist/ProxySU" -Force | Out-Null
+          Copy-Item "$publishDir/*" "dist/ProxySU/" -Recurse -Force
+          Compress-Archive -Path "dist/ProxySU/*" -DestinationPath "dist/ProxySU.zip" -CompressionLevel Optimal
+          $hash = (Get-FileHash "dist/ProxySU.zip" -Algorithm SHA256).Hash.ToLower()
+          "$hash  ProxySU.zip" | Set-Content "dist/ProxySU.sha256" -Encoding ascii
+          Write-Host "Package size: $((Get-Item 'dist/ProxySU.zip').Length) bytes"
+          Write-Host "SHA256: $hash"
+
       - name: Upload build output
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: proxysu-windows-release
           path: |
-            ProxySuper.WPF/bin/Release/
-            ProxySuper.Core/bin/Release/
+            dist/ProxySU.zip
+            dist/ProxySU.sha256
           if-no-files-found: error
