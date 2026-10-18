@@ -1,6 +1,13 @@
 # ProxySU
-V2ray, Xray, Trojan, NaiveProxy, Trojan-Go,  Brook,BBR install tools for windows。  
-V2ray，Xray, Trojan，NaiveProxy, Trojan-Go,  Brook 及相关插件。支持纯ipv6主机一键安装代理。  
+ProxySU Windows installer and configuration tool for V2Ray, Xray, Trojan, Trojan-Go, NaiveProxy, Brook, Hysteria2 and BBR.  
+ProxySU Windows 一键安装与配置工具，支持 V2Ray、Xray、Trojan、Trojan-Go、NaiveProxy、Brook、Hysteria2 及相关插件，也支持纯 IPv6 主机部署。  
+
+## Fork changes (4.3.1)  
+- VLESS XHTTP and VLESS XTLS (RAW) REALITY configuration and share links.  
+- Hysteria2 configuration and share-link scheme.  
+- gRPC service-name defaults/URL encoding and Trojan-Go WebSocket path validation.  
+- Windows .NET Framework Release build and configuration smoke tests run via GitHub Actions.  
+- See [CHANGELOG.md](CHANGELOG.md) for details.  
 BBR一键开启（仅支持CentOS8/Debian9/10/Ubuntu18.04及以上）,支持语言:English、简体中文、正体（繁体）中文，波斯语。  
 
 编译环境Visual Studio 2022  使用WPF界面。可一键安装 V2ray/Xray, Shadowsocks, Trojan-Go, NaiveProxy,  Brook 后续还会再添加其他。  
