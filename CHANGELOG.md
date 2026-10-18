@@ -1,10 +1,9 @@
-# ProxySU 4.3.2 — Release Notes
+# ProxySU 4.3.3 — Release Notes
 
 ## Changes
-- Remove the homepage promotional/ad carousel content.
-- Update project, help, release and update-check links to the `wuredi002/ProxySU` repository.
-- Restore previously requested protocol menu options, including MTProto-Go and V2Ray VLESS WebSocket/mKCP/QUIC entries.
-- Keep the VLESS XHTTP, VLESS XTLS (RAW) REALITY and Hysteria2 configuration/share-link improvements from 4.3.1.
+- Change the default primary port for new Xray and V2Ray configurations from fixed port 443 to a randomly selected port in the inclusive range 2000–65535.
+- Keep the existing VLESS XHTTP, VLESS XTLS (RAW) REALITY, Hysteria2, share-link, and repository-link improvements.
+- Preserve existing saved configuration ports; the random default applies when creating a new settings instance.
 
 ## Build and validation
 - Windows .NET Framework Release build via MSBuild.
@@ -13,3 +12,4 @@
 
 ## Notes
 - GUI interaction and live remote-server protocol deployment have not been exhaustively tested.
+- This release note does not claim the separately requested Xray VMESS/VLESS TCP, WebSocket and QUIC protocol restorations are complete.
