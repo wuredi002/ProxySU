@@ -63,12 +63,12 @@ jobs:
             dist/ProxySU.sha256
           if-no-files-found: error
 
-      - name: Publish v4.3.1 GitHub Release assets
+      - name: Publish v4.3.2 GitHub Release assets
         if: success() && github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v4.3.1
-          name: ProxySU v4.3.1
+          tag_name: v4.3.2
+          name: ProxySU v4.3.2
           files: |
             dist/ProxySU.zip
             dist/ProxySU.sha256
