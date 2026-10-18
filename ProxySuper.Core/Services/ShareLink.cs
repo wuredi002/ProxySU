@@ -276,7 +276,7 @@ namespace ProxySuper.Core.Services
 
                 if (v2rayType == V2RayType.VLESS_gRPC)
                 {
-                    parametersURL += $"&serviceName={settings.VLESS_gRPC_ServiceName}&mode=gun";
+                    parametersURL += $"&serviceName={HttpUtility.UrlEncode(string.IsNullOrWhiteSpace(settings.VLESS_gRPC_ServiceName) ? "grpc" : settings.VLESS_gRPC_ServiceName.Trim())}&mode=gun";
                 }
             }
 
