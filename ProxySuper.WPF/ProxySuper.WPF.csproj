@@ -521,8 +521,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\paid\expressvpn.png" />
-    <Resource Include="Images\paid
-ordvpn.png" />
+    <Resource Include="Images\paid\nordvpn.png" />
     <Resource Include="Images\paid\purevpn.png" />
     <Resource Include="Images\paid\surfshark.png" />
   </ItemGroup>
