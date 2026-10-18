@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProxySuper.Core.Models.Projects;
 using ProxySuper.Core.Templates;
@@ -54,17 +55,19 @@ namespace ProxySuper.Core.Services
 
             if (!useCustomWeb && !string.IsNullOrEmpty(parameters.MaskDomain))
             {
-                var prefix = "http://";
-                if (parameters.MaskDomain.StartsWith("https://"))
+                if (!Uri.TryCreate(parameters.MaskDomain.Trim(), UriKind.Absolute, out var maskUri)
+                    || (maskUri.Scheme != Uri.UriSchemeHttp && maskUri.Scheme != Uri.UriSchemeHttps)
+                    || string.IsNullOrWhiteSpace(maskUri.Host))
                 {
-                    prefix = "https://";
+                    throw new ArgumentException("伪装地址必须是有效的 http:// 或 https:// URL。", nameof(parameters.MaskDomain));
                 }
-                var domain = parameters.MaskDomain
-                    .TrimStart("http://".ToCharArray())
-                    .TrimStart("https://".ToCharArray())
-                    .TrimEnd('/');
 
-                caddyStr = caddyStr.Replace("##reverse_proxy##", $"reverse_proxy {prefix}{domain} {{ \n        header_up Host {domain} \n    }}");
+                var prefix = maskUri.Scheme + "://";
+                var domain = maskUri.IsDefaultPort
+                    ? maskUri.Host
+                    : maskUri.Host + ":" + maskUri.Port;
+
+                caddyStr = caddyStr.Replace("##reverse_proxy##", $"reverse_proxy {prefix}{domain} {{ \n        header_up Host {maskUri.Host} \n    }}");
             }
             else
             {
@@ -196,7 +199,9 @@ namespace ProxySuper.Core.Services
                 var gRPCInBound = LoadJsonObj(XrayConfigTemplates.VLESS_gRPC_ServerConfig);
                 gRPCInBound.port = parameters.VLESS_gRPC_Port;
                 SetClients(gRPCInBound, uuidList);
-                gRPCInBound.streamSettings.grpcSettings.serviceName = parameters.VLESS_gRPC_ServiceName;
+                gRPCInBound.streamSettings.grpcSettings.serviceName = string.IsNullOrWhiteSpace(parameters.VLESS_gRPC_ServiceName)
+                    ? "grpc"
+                    : parameters.VLESS_gRPC_ServiceName.Trim();
                 gRPCInBound.streamSettings.tlsSettings.serverName = parameters.Domain;
                 xrayConfig.inbounds.Add(JToken.FromObject(gRPCInBound));
             }
