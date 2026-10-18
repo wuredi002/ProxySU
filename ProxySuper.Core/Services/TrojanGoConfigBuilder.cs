@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProxySuper.Core.Models.Projects;
 using ProxySuper.Core.Templates;
@@ -49,7 +50,7 @@ namespace ProxySuper.Core.Services
                 normalized = "/" + normalized;
             }
 
-            if (normalized.Contains(" ") || normalized.Contains("\\r") || normalized.Contains("\\n")
+            if (normalized.Contains(" ") || normalized.Contains("\r") || normalized.Contains("\n")
                 || normalized.Contains("?") || normalized.Contains("#"))
             {
                 throw new System.ArgumentException("Trojan-Go WebSocket 路径不能包含空格、换行、查询参数或片段。", nameof(path));
