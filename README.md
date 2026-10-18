@@ -13,7 +13,7 @@ BBR一键开启（仅支持CentOS8/Debian9/10/Ubuntu18.04及以上）,支持语�
 编译环境Visual Studio 2022  使用WPF界面。可一键安装 V2ray/Xray, Shadowsocks, Trojan-Go, NaiveProxy,  Brook 后续还会再添加其他。  
 
 零基础用户，强烈建议看一下[Xray官网](https://xtls.github.io)的[小小白白话文-自建教程](https://xtls.github.io/document/level-0)。  
-更多相关资源与工具请看本项目Wiki[资源和工具](https://github.com/proxysu/ProxySU/wiki/%E8%B5%84%E6%BA%90%E5%92%8C%E5%B7%A5%E5%85%B7)。  
+更多相关资源与工具请看本项目Wiki[资源和工具](https://github.com/wuredi002/ProxySU/wiki/%E8%B5%84%E6%BA%90%E5%92%8C%E5%B7%A5%E5%85%B7)。  
 
 ![photo_2021-05-31_17-23-29](https://user-images.githubusercontent.com/73510229/120171754-f46ffd00-c234-11eb-8105-4e6a941a65bb.jpg)
 ![photo_2021-05-31_17-24-29](https://user-images.githubusercontent.com/73510229/120171966-297c4f80-c235-11eb-921a-2ddebad5dc58.jpg)
@@ -56,10 +56,10 @@ ProxySU在开发过程中，一般都是在vultr的vps中测试，测试系统�
 1.如果以前装过翻墙软件，请重装一下vps系统后，再试。  
 2.更换为其他版本的linux发行版，推荐使用 Debian 10+ 系统，再试。  
 
-以上两种方法不能解决，请各位网友及时发[issues](https://github.com/proxysu/windows/issues)，或者到[TG群组](https://t.me/proxysuissues)，反馈。  
+以上两种方法不能解决，请各位网友及时发[issues](https://github.com/wuredi002/ProxySU/issues)，或者到[TG群组](https://t.me/proxysuissues)，反馈。  
 
 在以上平台反馈求助时，请尽可能将安装出错的日志保存下来，并提供，将有利于查找错误原因。  
-在反馈问题前，可以先看一下 <<[常见问题集锦](https://github.com/proxysu/windows/wiki/CommonError)>>，是否可以解决。  
+在反馈问题前，可以先看一下 <<[常见问题集锦](https://github.com/wuredi002/ProxySU/wiki/CommonError)>>，是否可以解决。  
 
 ##### 关于兼容的密钥格式    
 ProxySU调用[SSH.NET](https://github.com/sshnet/SSH.NET)库登录远程主机，目前[SSH.NET](https://github.com/sshnet/SSH.NET)只支持以下格式的密钥：  
@@ -77,7 +77,7 @@ ProxySU调用[SSH.NET](https://github.com/sshnet/SSH.NET)库登录远程主机�
 见官方说明：  
 https://github.com/sshnet/SSH.NET#public-key-authentication  
 如果当前拥有的密钥格式不是以上几种，可以下载[puttygen](https://www.puttygen.com/)工具，将其转换成上面的格式。  
-[puttygen](https://www.puttygen.com/)使用教程可以[看这里](https://github.com/proxysu/windows/wiki/PrivateKeyConversionFormat)
+[puttygen](https://www.puttygen.com/)使用教程可以[看这里](https://github.com/wuredi002/ProxySU/wiki/PrivateKeyConversionFormat)
 
 ##### 关于Let's Encrypt证书  
 ProxySU所使用的acme.sh与Caddy，都是申请的Let's Encrypt免费证书。三个月需要续期，都是自动完成续期的，无需用户操作。但是Let's Encrypt证书有一些限制，请知晓，如下：  
@@ -102,11 +102,11 @@ Let's Encrypt证书申请频率的限制
 
 ## License
 
-[(MIT)](https://raw.githubusercontent.com/proxysu/windows/master/LICENSE)
+[(MIT)](https://raw.githubusercontent.com/wuredi002/ProxySU/master/LICENSE)
 
 ## 运行文件下载
 * 正式版（正式发布的版本，新功能完善后发布）  
-[下载](https://github.com/proxysu/ProxySU/releases)
+[下载](https://github.com/wuredi002/ProxySU/releases)
 
 ## Windows系统需要安装net4.8或以上
 
@@ -121,9 +121,9 @@ Microsoft [.NET Framework 4.8](https://dotnet.microsoft.com/download/dotnet-fram
 为了布署方便，程序使用root账户登录主机，出于慎重，请不要在运行重要程序及用于生产的主机上使用。程序所有源码开源，所使用的库都是github开源项目，可以保障最大的使用安全，程序不夹带任何私货、恶意代码及后门，也不会收集任何个人资料，不是在本项目地址下载的，不做任何保障，请尽可能从本项目地址下载。
 
 ## 程序使用问题反馈  
-* 在线提问  https://github.com/proxysu/windows/issues  
+* 在线提问  https://github.com/wuredi002/ProxySU/issues  
 
-在使用遇到问题时，请先看一下[常见问题集锦](https://github.com/proxysu/windows/wiki/CommonError)，如果还不能解决，可以到以上平台询问，个人精力有限，尽力解答。
+在使用遇到问题时，请先看一下[常见问题集锦](https://github.com/wuredi002/ProxySU/wiki/CommonError)，如果还不能解决，可以到以上平台询问，个人精力有限，尽力解答。
 
 [![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
 
