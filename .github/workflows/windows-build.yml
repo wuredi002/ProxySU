@@ -1,0 +1,45 @@
+name: Windows .NET Framework build and smoke tests
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-smoke-test:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore ProxySU.sln -NonInteractive
+
+      - name: Build Release solution
+        shell: pwsh
+        run: msbuild ProxySU.sln /m /t:Rebuild /p:Configuration=Release /p:RestorePackagesConfig=true /verbosity:minimal
+
+      - name: Run configuration and share-link smoke tests
+        shell: powershell
+        run: .\tests\smoke-tests.ps1
+
+      - name: Upload build output
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proxysu-windows-release
+          path: |
+            ProxySuper.WPF/bin/Release/
+            ProxySuper.Core/bin/Release/
+          if-no-files-found: error
