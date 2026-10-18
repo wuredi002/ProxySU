@@ -54,7 +54,7 @@ namespace ProxySuper.WPF.Views
 
         private void LaunchGitHubSite(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/proxysu/ProxySU");
+            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/wuredi002/ProxySU");
         }
 
         private void LaunchUseRootSite(object sender, RoutedEventArgs e)
@@ -135,7 +135,7 @@ namespace ProxySuper.WPF.Views
                     // GitHub API 需要 User-Agent
                     client.DefaultRequestHeaders.Add("User-Agent", "CSharpApp");
 
-                    string url = "https://api.github.com/repos/proxysu/ProxySU/releases/latest";
+                    string url = "https://api.github.com/repos/wuredi002/ProxySU/releases/latest";
 
                     string json = await client.GetStringAsync(url);
                     JObject release = JObject.Parse(json);
@@ -166,7 +166,7 @@ namespace ProxySuper.WPF.Views
         private void UpdateLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
            
-                System.Diagnostics.Process.Start(@"https://github.com/proxysu/ProxySU/releases");
+                System.Diagnostics.Process.Start(@"https://github.com/wuredi002/ProxySU/releases");
             
         }
 
