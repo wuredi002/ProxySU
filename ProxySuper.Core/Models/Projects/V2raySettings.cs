@@ -23,7 +23,7 @@ namespace ProxySuper.Core.Models.Projects
             WithTLS = true;
 
             var guid = Guid.NewGuid().ToString();
-            Port = 443;
+            Port = new Random().Next(2000, 65536);
             VLESS_KCP_Port = 2001;
             VLESS_QUIC_Port = 2002;
             VLESS_gRPC_Port = 2003;
